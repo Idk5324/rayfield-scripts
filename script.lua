@@ -110,6 +110,31 @@ local SettingsTab = Window:CreateTab("⚙️ Settings", 4483362368)
 -- ========== UI & VISUAL SETTINGS ==========
 local UIVisualSection = SettingsTab:CreateSection("UI & Visual Settings")
 
+-- Lock/Unlock Button in Settings
+local SettingsUILockButton = UIVisualSection:CreateButton({
+   Name = "🔓 Lock UI",
+   Callback = function()
+      Settings.UILocked = not Settings.UILocked
+      if Settings.UILocked then
+         SettingsUILockButton:Set("🔒 UI Locked")
+         Rayfield:Notify({
+            Title = "UI Locked",
+            Content = "The UI is now locked and cannot be moved",
+            Duration = 2,
+            Image = 4483345998,
+         })
+      else
+         SettingsUILockButton:Set("🔓 Lock UI")
+         Rayfield:Notify({
+            Title = "UI Unlocked",
+            Content = "The UI is now unlocked and can be moved",
+            Duration = 2,
+            Image = 4483345998,
+         })
+      end
+   end,
+})
+
 -- Theme Changer
 local ThemeDropdown = UIVisualSection:CreateDropdown({
    Name = "Theme",
@@ -236,6 +261,8 @@ local FOVSlider = GameplaySection:CreateSlider({
    end,
 })
 
+UIVisualSection:CreateDivider()
+
 -- ========== NOTIFICATION SETTINGS ==========
 local NotificationSection = SettingsTab:CreateSection("Notification Settings")
 
@@ -274,6 +301,8 @@ local NotificationSoundToggle = NotificationSection:CreateToggle({
       })
    end,
 })
+
+NotificationSection:CreateDivider()
 
 -- ========== SCRIPT BEHAVIOR SETTINGS ==========
 local ScriptBehaviorSection = SettingsTab:CreateSection("Script Behavior")
@@ -329,6 +358,8 @@ local AutoSaveToggle = ScriptBehaviorSection:CreateToggle({
       })
    end,
 })
+
+ScriptBehaviorSection:CreateDivider()
 
 -- ========== PERFORMANCE SETTINGS ==========
 local PerformanceSection = SettingsTab:CreateSection("Performance Settings")
