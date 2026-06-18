@@ -5,40 +5,33 @@ local IsMobile = game:GetService("UserInputService"):GetPlatform() == Enum.Platf
 
 local Window = Rayfield:CreateWindow({
    Name = "Atm0spheric✌️Hub",
-   Icon = 0, -- Icon in Topbar. Can use Lucide Icons (string) or Roblox Image (number). 0 to use no icon (default).
+   Icon = 0,
    LoadingTitle = "Atm0 Pr0ductio0n",
    LoadingSubtitle = "by Atm0",
-   ShowText = "Atm0spheric", -- for mobile users to unhide Rayfield, change if you'd like
-   Theme = "Default", -- Check https://docs.sirius.menu/rayfield/configuration/themes
-
-   ToggleUIKeybind = "K", -- The keybind to toggle the UI visibility (string like "K" or Enum.KeyCode)
-
+   ShowText = "Atm0spheric",
+   Theme = "Default",
+   ToggleUIKeybind = "K",
    DisableRayfieldPrompts = false,
-   DisableBuildWarnings = false, -- Prevents Rayfield from emitting warnings when the script has a version mismatch with the interface.
-
-   -- ScriptID = "sid_xxxxxxxxxxxx", -- Your Script ID from developer.sirius.menu — enables analytics, managed keys, and script hosting
-
+   DisableBuildWarnings = false,
    ConfigurationSaving = {
       Enabled = true,
-      FolderName = "spherecapture", -- Create a custom folder for your hub/game
+      FolderName = "spherecapture",
       FileName = "1config2files3"
    },
-
    Discord = {
-      Enabled = false, -- Prompt the user to join your Discord server if their executor supports it
-      Invite = "gYkaX5dxJW", -- The Discord invite code, do not include Discord.gg/. E.g. Discord.gg/ABCD would be ABCD
-      RememberJoins = true -- Set this to false to make them join the Discord every time they load it up
+      Enabled = false,
+      Invite = "gYkaX5dxJW",
+      RememberJoins = true
    },
-
-   KeySystem = false, -- Set this to true to use our key system
+   KeySystem = false,
    KeySettings = {
       Title = "Get Key",
       Subtitle = "Key System",
-      Note = "Join our Discord For Key", -- Use this to tell the user how to get a key
-      FileName = "kP9#vLx2$mQ8wR!t", -- It is recommended to use something unique, as other scripts using Rayfield may overwrite your key file
-      SaveKey = true, -- The user's key will be saved, but if you change the key, they will be unable to use your script
-      GrabKeyFromSite = false, -- If this is true, set Key below to the RAW site you would like Rayfield to get the key from
-      Key = {"W#8a4$K5k2#a"} -- List of keys that the system will accept, can be RAW file links (pastebin, github, etc.) or simple strings ("hello", "key22")
+      Note = "Join our Discord For Key",
+      FileName = "kP9#vLx2$mQ8wR!t",
+      SaveKey = true,
+      GrabKeyFromSite = false,
+      Key = {"W#8a4$K5k2#a"}
    }
 })
 
@@ -61,14 +54,14 @@ local Settings = {
 }
 
 -- ==================== HOME TAB ====================
-local MainTab = Window:CreateTab("Home", nil)
+local MainTab = Window:CreateTab("🏠 Home", 4529652865)
 local UIControlSection = MainTab:CreateSection("UI Controls")
 
 Rayfield:Notify({
    Title = "You executed Atm0 projects",
    Content = "join the discord",
    Duration = 5,
-   Image = nil,
+   Image = 4483345998,
 })
 
 -- Lock/Unlock Button
@@ -82,7 +75,7 @@ local UILockButton = UIControlSection:CreateButton({
             Title = "UI Locked",
             Content = "The UI is now locked and cannot be moved",
             Duration = 2,
-            Image = nil,
+            Image = 4483345998,
          })
       else
          UILockButton:Set("🔓 Lock UI")
@@ -90,21 +83,38 @@ local UILockButton = UIControlSection:CreateButton({
             Title = "UI Unlocked",
             Content = "The UI is now unlocked and can be moved",
             Duration = 2,
-            Image = nil,
+            Image = 4483345998,
          })
       end
    end,
 })
 
+-- Welcome Information
+local InfoSection = MainTab:CreateSection("Information")
+
+local InfoButton = InfoSection:CreateButton({
+   Name = "📋 View Script Info",
+   Callback = function()
+      Rayfield:Notify({
+         Title = "Atm0spheric Hub v2.0",
+         Content = "Mobile Friendly: " .. (IsMobile and "Yes ✓" or "No ✗") .. "\n\nCheck Settings tab for gameplay options!",
+         Duration = 5,
+         Image = 4483345998,
+      })
+   end,
+})
+
 -- ==================== SETTINGS TAB ====================
-local SettingsTab = Window:CreateTab("Settings", nil)
+local SettingsTab = Window:CreateTab("⚙️ Settings", 4483362368)
+
+-- ========== UI & VISUAL SETTINGS ==========
 local UIVisualSection = SettingsTab:CreateSection("UI & Visual Settings")
 
 -- Theme Changer
 local ThemeDropdown = UIVisualSection:CreateDropdown({
    Name = "Theme",
    Options = {"Default", "DarkBlue", "Darker"},
-   CurrentOption = "Default",
+   CurrentOption = {"Default"},
    MultipleOptions = false,
    Flag = "ThemeDropdown",
    Callback = function(Options)
@@ -113,7 +123,7 @@ local ThemeDropdown = UIVisualSection:CreateDropdown({
          Title = "Theme Changed",
          Content = "Theme changed to: " .. Options[1],
          Duration = 2,
-         Image = nil,
+         Image = 4483345998,
       })
    end,
 })
@@ -132,12 +142,12 @@ local UIScaleSlider = UIVisualSection:CreateSlider({
          Title = "UI Scaled",
          Content = "UI Scale set to: " .. tostring(Value) .. "x",
          Duration = 1.5,
-         Image = nil,
+         Image = 4483345998,
       })
    end,
 })
 
--- ==================== GAMEPLAY SETTINGS ====================
+-- ========== GAMEPLAY SETTINGS ==========
 local GameplaySection = SettingsTab:CreateSection("Gameplay Settings")
 
 -- Auto Farm Toggle
@@ -152,7 +162,7 @@ local AutoFarmToggle = GameplaySection:CreateToggle({
          Title = "Auto Farm " .. status,
          Content = "Auto Farm has been " .. status,
          Duration = 2,
-         Image = nil,
+         Image = 4483345998,
       })
    end,
 })
@@ -168,14 +178,14 @@ local WalkspeedSlider = GameplaySection:CreateSlider({
    Callback = function(Value)
       Settings.WalkspeedMultiplier = Value
       local player = game.Players.LocalPlayer
-      if player.Character and player.Character:FindFirstChild("Humanoid") then
+      if player and player.Character and player.Character:FindFirstChild("Humanoid") then
          player.Character.Humanoid.WalkSpeed = 16 * Value
       end
       Rayfield:Notify({
          Title = "Walkspeed Updated",
          Content = "Walkspeed set to: " .. tostring(Value) .. "x",
          Duration = 1.5,
-         Image = nil,
+         Image = 4483345998,
       })
    end,
 })
@@ -191,14 +201,14 @@ local JumpPowerSlider = GameplaySection:CreateSlider({
    Callback = function(Value)
       Settings.JumpPowerMultiplier = Value
       local player = game.Players.LocalPlayer
-      if player.Character and player.Character:FindFirstChild("Humanoid") then
+      if player and player.Character and player.Character:FindFirstChild("Humanoid") then
          player.Character.Humanoid.JumpPower = 50 * Value
       end
       Rayfield:Notify({
          Title = "Jump Power Updated",
          Content = "Jump Power set to: " .. tostring(Value) .. "x",
          Duration = 1.5,
-         Image = nil,
+         Image = 4483345998,
       })
    end,
 })
@@ -213,17 +223,20 @@ local FOVSlider = GameplaySection:CreateSlider({
    Flag = "FOVSlider",
    Callback = function(Value)
       Settings.FOV = Value
-      game.Workspace.CurrentCamera.FieldOfView = Value
+      local camera = game.Workspace.CurrentCamera
+      if camera then
+         camera.FieldOfView = Value
+      end
       Rayfield:Notify({
          Title = "FOV Updated",
          Content = "FOV set to: " .. tostring(Value) .. "°",
          Duration = 1.5,
-         Image = nil,
+         Image = 4483345998,
       })
    end,
 })
 
--- ==================== NOTIFICATION SETTINGS ====================
+-- ========== NOTIFICATION SETTINGS ==========
 local NotificationSection = SettingsTab:CreateSection("Notification Settings")
 
 -- Notification Duration
@@ -240,7 +253,7 @@ local NotifDurationSlider = NotificationSection:CreateSlider({
          Title = "Duration Updated",
          Content = "Notifications will now last for " .. tostring(Value) .. " seconds",
          Duration = Value,
-         Image = nil,
+         Image = 4483345998,
       })
    end,
 })
@@ -257,12 +270,12 @@ local NotificationSoundToggle = NotificationSection:CreateToggle({
          Title = "Notification Sound " .. status,
          Content = "Notification sounds have been " .. status,
          Duration = 2,
-         Image = nil,
+         Image = 4483345998,
       })
    end,
 })
 
--- ==================== SCRIPT BEHAVIOR SETTINGS ====================
+-- ========== SCRIPT BEHAVIOR SETTINGS ==========
 local ScriptBehaviorSection = SettingsTab:CreateSection("Script Behavior")
 
 -- Auto-Execute on Join
@@ -277,7 +290,7 @@ local AutoExecuteToggle = ScriptBehaviorSection:CreateToggle({
          Title = "Auto-Execute " .. status,
          Content = "Auto-Execute has been " .. status,
          Duration = 2,
-         Image = nil,
+         Image = 4483345998,
       })
    end,
 })
@@ -295,7 +308,7 @@ local DebugModeToggle = ScriptBehaviorSection:CreateToggle({
          Title = "Debug Mode " .. status,
          Content = "Debug mode has been " .. status,
          Duration = 2,
-         Image = nil,
+         Image = 4483345998,
       })
    end,
 })
@@ -312,12 +325,12 @@ local AutoSaveToggle = ScriptBehaviorSection:CreateToggle({
          Title = "Auto-Save " .. status,
          Content = "Configuration auto-save has been " .. status,
          Duration = 2,
-         Image = nil,
+         Image = 4483345998,
       })
    end,
 })
 
--- ==================== PERFORMANCE SETTINGS ====================
+-- ========== PERFORMANCE SETTINGS ==========
 local PerformanceSection = SettingsTab:CreateSection("Performance Settings")
 
 -- FPS Cap
@@ -335,7 +348,7 @@ local FPSCapSlider = PerformanceSection:CreateSlider({
          Title = "FPS Cap Updated",
          Content = "FPS Cap set to: " .. status,
          Duration = 1.5,
-         Image = nil,
+         Image = 4483345998,
       })
    end,
 })
@@ -354,18 +367,18 @@ local RenderDistanceSlider = PerformanceSection:CreateSlider({
          Title = "Render Distance Updated",
          Content = "Render Distance set to: " .. tostring(Value) .. " studs",
          Duration = 1.5,
-         Image = nil,
+         Image = 4483345998,
       })
    end,
 })
 
 -- ==================== MISC TAB ====================
-local MiscTab = Window:CreateTab("Misc", nil)
+local MiscTab = Window:CreateTab("📁 Misc", 4483353028)
 local MiscSection = MiscTab:CreateSection("Miscellaneous")
 
 -- Reset Settings Button
 local ResetButton = MiscSection:CreateButton({
-   Name = "Reset All Settings",
+   Name = "🔄 Reset All Settings",
    Callback = function()
       Settings = {
          UILocked = false,
@@ -387,23 +400,26 @@ local ResetButton = MiscSection:CreateButton({
          Title = "Settings Reset",
          Content = "All settings have been reset to default",
          Duration = 3,
-         Image = nil,
+         Image = 4483345998,
       })
    end,
 })
 
 -- About Button
 local AboutButton = MiscSection:CreateButton({
-   Name = "About This Hub",
+   Name = "ℹ️ About This Hub",
    Callback = function()
       Rayfield:Notify({
          Title = "Atm0spheric Hub",
-         Content = "Version 2.0 - Loaded with enhanced settings!\nMobile Friendly: " .. (IsMobile and "Yes" or "No"),
+         Content = "Version 2.0 - Loaded with enhanced settings!\nMobile Friendly: " .. (IsMobile and "Yes ✓" or "No ✗"),
          Duration = 5,
-         Image = nil,
+         Image = 4483345998,
       })
    end,
 })
+
+-- Separator
+MiscSection:CreateDivider()
 
 -- Kill Menu Button
 local KillMenuButton = MiscSection:CreateButton({
@@ -417,4 +433,8 @@ local KillMenuButton = MiscSection:CreateButton({
 if Settings.DebugMode then
    print("[Atm0spheric Hub] Script initialized successfully!")
    print("[Atm0spheric Hub] Mobile Mode: " .. (IsMobile and "Enabled" or "Disabled"))
+else
+   print("[Atm0spheric Hub] Script loaded! Press K to toggle UI")
 end
+
+Rayfield:LoadConfiguration()
