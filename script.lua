@@ -98,8 +98,6 @@ local UILockButton = UIControlSection:CreateButton({
 
 -- ==================== SETTINGS TAB ====================
 local SettingsTab = Window:CreateTab("Settings", nil)
-
--- UI & VISUAL SETTINGS
 local UIVisualSection = SettingsTab:CreateSection("UI & Visual Settings")
 
 -- Theme Changer
