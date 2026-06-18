@@ -17,7 +17,7 @@ local Window = Rayfield:CreateWindow({
 
    ConfigurationSaving = {
       Enabled = true,
-      FolderName = spherecapture, -- Create a custom folder for your hub/game
+      FolderName = "spherecapture", -- Create a custom folder for your hub/game
       FileName = "1config2files3"
    },
 
@@ -51,7 +51,6 @@ Rayfield:Notify({
 
 local SettingsTab = Window:CreateTab("Settings", nil) -- Title, Image
 local SettingsSection = SettingsTab:CreateSection("Settings")
-})
 
 local Button = SettingsTab:CreateButton({
    Name = "kill menu",
