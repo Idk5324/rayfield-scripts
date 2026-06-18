@@ -49,7 +49,7 @@ Rayfield:Notify({
    Image = nil,
 })
 
-local SettingsTab = Window:CreateTab("Settings"", nil) -- Title, Image
+local SettingsTab = Window:CreateTab("Settings", nil) -- Title, Image
 local SettingsSection = SettingsTab:CreateSection("Settings")
 })
 
