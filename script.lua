@@ -4,7 +4,7 @@ local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
 local IsMobile = game:GetService("UserInputService"):GetPlatform() == Enum.Platform.IOS or game:GetService("UserInputService"):GetPlatform() == Enum.Platform.Android
 
 local Window = Rayfield:CreateWindow({
-   Name = "Atm0spheric Hub",
+   Name = "Atm0spheric✌️Hub",
    Icon = 0, -- Icon in Topbar. Can use Lucide Icons (string) or Roblox Image (number). 0 to use no icon (default).
    LoadingTitle = "Atm0 Pr0ductio0n",
    LoadingSubtitle = "by Atm0",
