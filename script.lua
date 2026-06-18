@@ -406,7 +406,7 @@ local AboutButton = MiscSection:CreateButton({
 })
 
 -- Kill Menu Button
-local KillMenuButton = SettingsTab:CreateButton({
+local KillMenuButton = MiscSection:CreateButton({
    Name = "🔴 Destroy Menu",
    Callback = function()
       Rayfield:Destroy()
