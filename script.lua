@@ -49,6 +49,68 @@ Rayfield:Notify({
    Image = nil,
 })
 
+-- Function to find the closest Temp V and teleport to it
+local function TeleportToClosestTempV()
+   local player = game.Players.LocalPlayer
+   local character = player.Character
+   
+   if not character or not character:FindFirstChild("HumanoidRootPart") then
+      Rayfield:Notify({
+         Title = "Error",
+         Content = "Character not found!",
+         Duration = 3,
+         Image = nil,
+      })
+      return
+   end
+   
+   local playerPos = character.HumanoidRootPart.Position
+   local closestTempV = nil
+   local closestDistance = math.huge
+   
+   -- Search for Temp V entities in the workspace
+   for _, obj in pairs(workspace:GetDescendants()) do
+      if obj.Name:match("Temp V") or obj.Name == "Temp V" then
+         if obj:IsA("Model") or obj:IsA("Part") then
+            local objPos = obj:IsA("Model") and obj:FindFirstChild("HumanoidRootPart") and obj.HumanoidRootPart.Position or obj.Position
+            local distance = (playerPos - objPos).Magnitude
+            
+            if distance < closestDistance then
+               closestDistance = distance
+               closestTempV = obj
+            end
+         end
+      end
+   end
+   
+   if closestTempV then
+      local targetPos = closestTempV:IsA("Model") and closestTempV:FindFirstChild("HumanoidRootPart") and closestTempV.HumanoidRootPart.Position or closestTempV.Position
+      character.HumanoidRootPart.CFrame = CFrame.new(targetPos + Vector3.new(0, 3, 0))
+      
+      Rayfield:Notify({
+         Title = "Teleported",
+         Content = "Teleported to closest Temp V (" .. math.floor(closestDistance) .. " studs away)",
+         Duration = 2,
+         Image = nil,
+      })
+   else
+      Rayfield:Notify({
+         Title = "Not Found",
+         Content = "No Temp V found in the workspace!",
+         Duration = 3,
+         Image = nil,
+      })
+   end
+end
+
+-- Add teleport button to Home tab
+local TeleportButton = MainTab:CreateButton({
+   Name = "Teleport to Closest Temp V",
+   Callback = function()
+      TeleportToClosestTempV()
+   end,
+})
+
 local SettingsTab = Window:CreateTab("Settings", nil) -- Title, Image
 local SettingsSection = SettingsTab:CreateSection("Settings")
 
